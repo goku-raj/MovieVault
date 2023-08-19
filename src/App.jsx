@@ -20,12 +20,13 @@ function App() {
   
   useEffect(()=>{
     fetchApiConfig()
+    genresCall()
   }, [])
 
   const fetchApiConfig = () =>{
     fetchData('/configuration')
     .then((res)=>{
-      console.log(res)
+      // console.log(res)
 
       const url ={
         backdrop: res.images.secure_base_url + 'original',
@@ -35,6 +36,23 @@ function App() {
 
       dispatch(getApiConfiguration(url))
     })
+  }
+
+  const genresCall = async () =>{
+    let promises = []
+    let endpoints = ['tv', 'movie']
+    let allGenres = {}
+
+    endpoints.forEach((url)=>{
+      promises.push(fetchData(`/genre/${url}/list`))
+    })
+    const data = await Promise.all(promises);
+    // console.log(data)
+    data.map(({genres})=>{
+      return genres.map((item) => (allGenres[item.id]= item))
+    });
+    // console.log(allGenres)
+    dispatch(getGenres(allGenres)); 
   }
   return (
     <BrowserRouter>
