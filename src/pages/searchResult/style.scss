@@ -3,16 +3,13 @@
     min-height: 700px;
     padding-top: 100px;
     .resultNotFound {
-        font-size: 24px;
+        font-size: 35px;
         color: var(--pink);
-        font-weight: 500;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        // .noResultImage{
-        //     width: 10px;
-        //     height: 10px;
-        // }
+    }
+    .noResultImage{
+        img{
+            width: 100%;
+        }
     }
     .pageTitle {
         font-size: 24px;
